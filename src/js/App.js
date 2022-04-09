@@ -11,6 +11,9 @@ export default function App(){
                 electron.filesApi.getImage()
             }}>Upload File</button>
             <div id="image_container"></div>
+            <button onClick={() =>
+                electron.notificationApi.nextPageApi.nextPage()
+            }>Next Page</button>
         </>
     )
 }

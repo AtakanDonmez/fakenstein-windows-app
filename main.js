@@ -52,5 +52,8 @@ ipcMain.on('upload', (event) => {
     })
 })
 
+ipcMain.on('next_page', (event) => {
+
+})
 
 app.whenReady().then(createWindow)

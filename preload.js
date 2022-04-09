@@ -14,6 +14,11 @@ contextBridge.exposeInMainWorld('electron', {
         getImage() {
             ipcRenderer.send('upload');
         }
+    },
+    nextPageApi: {
+        nextPage(){
+            ipcRenderer.send('next_page');
+        }
     }
 });
 
