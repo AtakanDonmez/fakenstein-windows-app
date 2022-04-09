@@ -14,8 +14,6 @@ npm install --save-dev electron-reload
 // setup is complete, delete all folders in the project folder except the node_modules folder  
 // copy the files here in the repository to the same place where the node_modules folder resides
 
-To see the project files on VSCode:  
-code . 
 
 To start the project:  
 npm run watch  
