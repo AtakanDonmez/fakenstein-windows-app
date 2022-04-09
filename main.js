@@ -52,32 +52,5 @@ ipcMain.on('upload', (event) => {
     })
 })
 
-ipcMain.on("chooseFile", (event, arg) => {
-    const result = dialog.showOpenDialog({
-        properties: ["openFile"],
-        filters: [{ name: "Images", extensions: ["png","jpg","jpeg"] }]
-    });
-
-    result.then(({canceled, filePaths, bookmarks}) => {
-        const base64 = fs.readFileSync(filePaths[0]).toString('base64');
-        event.reply("chosenFile", base64);
-    }).catch(err => {
-        console.log(err)
-    });
-});
 
 app.whenReady().then(createWindow)
-
-/* (file => {
-    // Stating whether dialog operation was
-    // cancelled or not.
-    console.log(file.filePaths[0]);
-    console.log(file.canceled);
-    if (!file.canceled) {
-        // Updating the GLOBAL filepath variable to user-selected file.
-        global.filepath = file.filePaths[0];
-        event.reply("uploaded", filepath);
-    }
-}).catch(err => {
-    console.log(err)
-}); */

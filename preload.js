@@ -23,5 +23,5 @@ ipcRenderer.on("uploaded", (event, filepath) => {
     var _out = '<img src="data:image/' + extension + ';base64,' + filepath + '" />';
     //render/display
     var _target = document.getElementById('image_container');
-    _target.insertAdjacentHTML('beforeend', _out);
+    _target.innerHTML = _out;
 });
