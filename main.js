@@ -1,6 +1,7 @@
 console.log('Hello World');
 const {BrowserWindow, app, ipcMain, Notification, dialog} = require('electron');
 const path = require("path");
+const fs = require("fs");
 
 const isDev = !app.isPackaged;
 
@@ -33,7 +34,7 @@ ipcMain.on('notify', (_, message) => {
     new Notification({title: 'Notification', body: message}).show();
 })
 
-ipcMain.on('upload', (_) => {
+ipcMain.on('upload', (event) => {
     dialog.showOpenDialog({
         title: 'Select the File to be uploaded',
         defaultPath: path.join(__dirname, '../assets/'),
@@ -43,20 +44,40 @@ ipcMain.on('upload', (_) => {
             { name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif'] }, ],
         // Specifying the File Selector Property
         properties: ['openFile']
-    }).then(file => {
-        // Stating whether dialog operation was
-        // cancelled or not.
-        console.log(file.canceled);
-        if (!file.canceled) {
-            // Updating the GLOBAL filepath variable
-            // to user-selected file.
-            global.filepath = file.filePaths[0].toString();
-            console.log(global.filepath);
+    }).then(({canceled, filePaths, bookmarks}) => {
+        if (!canceled){
+            const filepath = fs.readFileSync(filePaths[0]).toString('base64');
+            event.reply("uploaded", filepath);
         }
+    })
+})
+
+ipcMain.on("chooseFile", (event, arg) => {
+    const result = dialog.showOpenDialog({
+        properties: ["openFile"],
+        filters: [{ name: "Images", extensions: ["png","jpg","jpeg"] }]
+    });
+
+    result.then(({canceled, filePaths, bookmarks}) => {
+        const base64 = fs.readFileSync(filePaths[0]).toString('base64');
+        event.reply("chosenFile", base64);
     }).catch(err => {
         console.log(err)
     });
-})
-
+});
 
 app.whenReady().then(createWindow)
+
+/* (file => {
+    // Stating whether dialog operation was
+    // cancelled or not.
+    console.log(file.filePaths[0]);
+    console.log(file.canceled);
+    if (!file.canceled) {
+        // Updating the GLOBAL filepath variable to user-selected file.
+        global.filepath = file.filePaths[0];
+        event.reply("uploaded", filepath);
+    }
+}).catch(err => {
+    console.log(err)
+}); */

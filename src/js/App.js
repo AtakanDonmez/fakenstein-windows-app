@@ -10,6 +10,7 @@ export default function App(){
             <button onClick={() => {
                 electron.filesApi.getImage()
             }}>Upload File</button>
+            <div id="image_container"></div>
         </>
     )
 }

@@ -1,4 +1,5 @@
 const {ipcRenderer, contextBridge} = require('electron');
+const path = require('path');
 
 contextBridge.exposeInMainWorld('electron', {
     notificationApi: {
@@ -14,4 +15,13 @@ contextBridge.exposeInMainWorld('electron', {
             ipcRenderer.send('upload');
         }
     }
+});
+
+ipcRenderer.on("uploaded", (event, filepath) => {
+    //example for .png
+    extension = path.extname(filepath);
+    var _out = '<img src="data:image/' + extension + ';base64,' + filepath + '" />';
+    //render/display
+    var _target = document.getElementById('image_container');
+    _target.insertAdjacentHTML('beforeend', _out);
 });
