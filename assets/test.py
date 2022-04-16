@@ -1,0 +1,1 @@
+print("Output from Python: " + sys.argv[1])
