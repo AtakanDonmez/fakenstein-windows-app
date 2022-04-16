@@ -7,10 +7,10 @@ Original file is located at
     https://colab.research.google.com/drive/14IkN9Yb7GpDaMXMd_d6lldZ75wYn7wwU
 """
 
-!pip install cvlib
-!pip install python-dotenv
-!pip install mtcnn
-!pip install mxnet
+#pip install cvlib
+#pip install python-dotenv
+#pip install mtcnn
+#pip install mxnet
 
 import cv2
 from matplotlib import pyplot
