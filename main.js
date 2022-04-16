@@ -2,6 +2,7 @@ console.log('Hello World');
 const {BrowserWindow, app, ipcMain, Notification, dialog} = require('electron');
 const path = require("path");
 const fs = require("fs");
+const spawn = require("child_process").spawn;
 
 const isDev = !app.isPackaged;
 
@@ -54,6 +55,17 @@ ipcMain.on('upload', (event) => {
 
 ipcMain.on('next_page', (event) => {
 
+})
+
+ipcMain.on('boundary_box', (event) =>{
+    console.log("python start");
+    let pypath = path.join(__dirname, 'assets', 'test.py');
+    console.log(pypath);
+    let py = spawn('python',[pypath, filepath]);
+    py.stdout.on('data', data => console.log('data : ', data.toString()));
+    py.on('close', ()=>{
+        console.log("python end");
+    })
 })
 
 app.whenReady().then(createWindow)

@@ -12,7 +12,10 @@ export default function App(){
             }}>Upload File</button>
             <div id="image_container"></div>
             <button onClick={() =>
-                electron.notificationApi.nextPageApi.nextPage()
+                electron.modelsApi.boundaryBox()
+            }>Draw Boundary Box</button>
+            <button onClick={() =>
+                electron.nextPageApi.nextPage()
             }>Next Page</button>
         </>
     )

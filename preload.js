@@ -19,6 +19,12 @@ contextBridge.exposeInMainWorld('electron', {
         nextPage(){
             ipcRenderer.send('next_page');
         }
+    },
+
+    modelsApi: {
+        boundaryBox(){
+            ipcRenderer.send('boundary_box');
+        }
     }
 });
 
