@@ -58,7 +58,7 @@ drive.mount('/content/drive')
 # Commented out IPython magic to ensure Python compatibility.
 # %cd drive/MyDrive/SENIOR DESIGN PROJECT
 
-picture1 = "test_images/d.jpg" #buraya file path
+picture1 = "C:\Users\atkdo\Desktop\Screenshot 2022-02-07 013408.jpg" #buraya file path
 
 def boundary_box(filename, detected_faces):
     # load the image
@@ -209,5 +209,5 @@ else:
   for face in classified_faces:
     generate_faces(gender = face[0], age = face[1])
 
-
+print('sa')
 
