@@ -1,1 +1,3 @@
-print("Output from Python: " + sys.argv[1])
+import sys
+print("Output from Python: ")
+print(sys.argv[1])

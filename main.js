@@ -6,7 +6,7 @@ const spawn = require("child_process").spawn;
 
 const isDev = !app.isPackaged;
 
-global.filepath = undefined;
+var filepath = undefined;
 
 function  createWindow() {
     const win = new BrowserWindow({
@@ -47,8 +47,10 @@ ipcMain.on('upload', (event) => {
         properties: ['openFile']
     }).then(({canceled, filePaths, bookmarks}) => {
         if (!canceled){
-            const filepath = fs.readFileSync(filePaths[0]).toString('base64');
-            event.reply("uploaded", filepath);
+            filepath = filePaths[0];
+            let base_64 = fs.readFileSync(filePaths[0]).toString('base64');
+            console.log(filepath);
+            event.reply("uploaded", base_64);
         }
     })
 })
@@ -61,6 +63,7 @@ ipcMain.on('boundary_box', (event) =>{
     console.log("python start");
     let pypath = path.join(__dirname, 'assets', 'test.py');
     console.log(pypath);
+    console.log(filepath);
     let py = spawn('python',[pypath, filepath]);
     py.stdout.on('data', data => console.log('data : ', data.toString()));
     py.on('close', ()=>{
