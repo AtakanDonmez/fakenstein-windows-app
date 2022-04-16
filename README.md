@@ -1,4 +1,4 @@
-Download latest stable version of Node from here :   
+Download latest stable version of Node from here:   
 https://nodejs.org/en/  
 
 Check if node is installed:  
@@ -18,3 +18,4 @@ npm install --save-dev electron-reload
 To start the project:  
 npm run watch  
 npm start  
+
