@@ -148,20 +148,20 @@ def classify_faces(filename, faceBoxes, resultImg):
         :min(faceBox[2]+padding, image.shape[1]-1)]
     
     im = Image.fromarray(np.uint8(face))
-    im.show()
+    #im.show()
     blurImage = im.filter(ImageFilter.BLUR)
-    blurImage.show()
+    #blurImage.show()
     #blurImage.save('simBlurImage.jpg')
 
     blob=cv2.dnn.blobFromImage(face, 1.0, (227,227), MODEL_MEAN_VALUES, swapRB=False)
-    print("#====Detected Age and Gender====#")
+    #print("#====Detected Age and Gender====#")
     gender,age = genderAge(genderNet, ageNet, blob)
-    print('Gender',gender)
-    print('Age',age)
+    #print('Gender',gender)
+    #print('Age',age)
     classified_faces.append([gender, age])
     # Write images into the results directory
     cv2.imwrite(APPROOT+'results/'+str(image) + ".jpg", resultImg)
-  plt.imshow(resultImg)
+    #plt.imshow(resultImg)
   return classified_faces
 
 resultImg, faceBoxes = detect_faces(picture1)
@@ -171,9 +171,8 @@ if not faceBoxes:
 
 else:
   classified_faces = classify_faces(picture1, faceBoxes, resultImg)
-  print(classified_faces)
+  #print(classified_faces)
   #blur_faces(picture1, faceBoxes)
   #for face in classified_faces:
     #generate_faces(gender = face[0], age = face[1])
-
-
+  print(faceBoxes)
