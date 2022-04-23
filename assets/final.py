@@ -12,43 +12,12 @@ Original file is located at
 !pip install mtcnn
 !pip install mxnet
 """
-import cv2
+
 from matplotlib import pyplot
-from matplotlib.patches import Rectangle
-from mtcnn.mtcnn import MTCNN
-from pathlib import Path
-import logging
-from dotenv import load_dotenv
-import cv2
-import sys
-import glob
-import logging
-from PIL import Image, ImageFilter
-import argparse
-import numpy as np
-import mxnet as mx
-import pandas as pd
-from pathlib import Path
 import matplotlib.pyplot as plt
-import tensorflow as tf
-from matplotlib import pyplot
-from mtcnn.mtcnn import MTCNN
-from PIL import Image
-import pandas as pd
-import os
-from keras.layers import Input, Conv2D, Flatten, Dense, Conv2DTranspose, Concatenate, Reshape, Lambda, Activation, BatchNormalization, LeakyReLU, Dropout,  GlobalAveragePooling2D, RepeatVector
-from keras.models import Model, Sequential
-from keras import backend as K
-from keras.models import load_model
-import os
 import cv2
-import argparse
-import dlib
+from PIL import Image, ImageFilter
 import numpy as np
-import scipy.spatial as spatial
-import logging
-from google.colab.patches import cv2_imshow
-from keras.utils.vis_utils import plot_model
 
 """
 from google.colab import drive
@@ -58,7 +27,8 @@ drive.mount('/content/drive')
 # Commented out IPython magic to ensure Python compatibility.
 # %cd drive/MyDrive/SENIOR DESIGN PROJECT
 
-picture1 = "C:\Users\atkdo\Desktop\Screenshot 2022-02-07 013408.jpg" #buraya file path
+picture1 = sys.argv[1] #buraya file path
+print('sa')
 
 def boundary_box(filename, detected_faces):
     # load the image
@@ -77,7 +47,6 @@ def boundary_box(filename, detected_faces):
         ax.add_patch(rect)
     # show the plot
     pyplot.show()
-
 
 def getFaceBox(net, image, conf_threshold=0.7):
     image=image.copy()
@@ -143,24 +112,24 @@ def genderAge(genderNet, ageNet, blob):
   return gender,age
 
 def detect_faces(filename):
-  faceProto = "faceInformation/model/facenet/opencv_face_detector.pbtxt"
-  faceModel = "faceInformation/model/facenet/opencv_face_detector_uint8.pb"
-  
+  faceProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector.pbtxt"
+  faceModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector_uint8.pb"
+  print('sa2')
   #Load face detection model
   faceNet=cv2.dnn.readNet(faceModel,faceProto)
-
+  print('sa3')
   image = pyplot.imread(filename)
   resultImg,faceBoxes=getFaceBox(faceNet,image)
 
   return resultImg, faceBoxes
 
 def classify_faces(filename, faceBoxes, resultImg):
-  ageProto = "faceInformation/model/age/age_deploy.prototxt"
-  ageModel = "faceInformation/model/age/age_net.caffemodel"
-  genderProto = "faceInformation/model/gender/gender_deploy.prototxt"
-  genderModel = "faceInformation/model/gender/gender_net.caffemodel"
-  pathImg = "faceInformation/Dataset/"
-  APPROOT = "faceInformation/"
+  ageProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\age\\age_deploy.prototxt"
+  ageModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\age\\age_net.caffemodel"
+  genderProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\gender\\gender_deploy.prototxt"
+  genderModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\gender\\gender_net.caffemodel"
+  pathImg = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\Dataset/"
+  APPROOT = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\"
   
   #Load age detection model
   ageNet=cv2.dnn.readNet(ageModel,ageProto)
@@ -197,17 +166,21 @@ def classify_faces(filename, faceBoxes, resultImg):
   plt.imshow(resultImg)
   return classified_faces
 
+print('sa1')
+
 
 resultImg, faceBoxes = detect_faces(picture1)
+
+print('sa2')
 if not faceBoxes:
   print("No face detected")
 
 else:
   classified_faces = classify_faces(picture1, faceBoxes, resultImg)
   print(classified_faces)
-  blur_faces(picture1, faceBoxes)
-  for face in classified_faces:
-    generate_faces(gender = face[0], age = face[1])
+  #blur_faces(picture1, faceBoxes)
+  #for face in classified_faces:
+    #generate_faces(gender = face[0], age = face[1])
 
 print('sa')
 
