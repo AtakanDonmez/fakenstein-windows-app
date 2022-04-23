@@ -10,7 +10,7 @@ npm install --save electron
 npm install --save react react-dom  
 npm install --save-dev @babel/core @babel/preset-env @babel/preset-react css-loader style-loader sass-loader sass webpack webpack-cli  
 npm install --save-dev electron-reload  
-
+npm install --save babel-loader  
 // setup is complete, delete all folders in the project folder except the node_modules folder  
 // copy the files here in the repository to the same place where the node_modules folder resides
 
