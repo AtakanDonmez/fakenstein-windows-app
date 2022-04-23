@@ -29,7 +29,6 @@ drive.mount('/content/drive')
 # %cd drive/MyDrive/SENIOR DESIGN PROJECT
 
 picture1 = sys.argv[1] #buraya file path
-print('sa')
 
 def boundary_box(filename, detected_faces):
     # load the image
@@ -115,10 +114,8 @@ def genderAge(genderNet, ageNet, blob):
 def detect_faces(filename):
   faceProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector.pbtxt"
   faceModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector_uint8.pb"
-  print('sa2')
   #Load face detection model
   faceNet=cv2.dnn.readNet(faceModel,faceProto)
-  print('sa3')
   image = pyplot.imread(filename)
   resultImg,faceBoxes=getFaceBox(faceNet,image)
 
@@ -154,7 +151,7 @@ def classify_faces(filename, faceBoxes, resultImg):
     im.show()
     blurImage = im.filter(ImageFilter.BLUR)
     blurImage.show()
-    blurImage.save('simBlurImage.jpg')
+    #blurImage.save('simBlurImage.jpg')
 
     blob=cv2.dnn.blobFromImage(face, 1.0, (227,227), MODEL_MEAN_VALUES, swapRB=False)
     print("#====Detected Age and Gender====#")
@@ -167,12 +164,8 @@ def classify_faces(filename, faceBoxes, resultImg):
   plt.imshow(resultImg)
   return classified_faces
 
-print('sa1')
-
-
 resultImg, faceBoxes = detect_faces(picture1)
 
-print('sa2')
 if not faceBoxes:
   print("No face detected")
 
@@ -183,5 +176,4 @@ else:
   #for face in classified_faces:
     #generate_faces(gender = face[0], age = face[1])
 
-print('sa')
 

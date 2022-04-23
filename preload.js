@@ -28,6 +28,7 @@ contextBridge.exposeInMainWorld('electron', {
     }
 });
 
+
 ipcRenderer.on("uploaded", (event, filepath) => {
     //example for .png
     extension = path.extname(filepath);
