@@ -19,7 +19,9 @@ import cv2
 from PIL import Image, ImageFilter
 import numpy as np
 import sys
+import os
 
+dir = os.path.dirname(__file__)
 """
 from google.colab import drive
 drive.mount('/content/drive')
@@ -112,8 +114,8 @@ def genderAge(genderNet, ageNet, blob):
   return gender,age
 
 def detect_faces(filename):
-  faceProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector.pbtxt"
-  faceModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\facenet\\opencv_face_detector_uint8.pb"
+  faceProto = os.path.join(dir, 'faceInformation', 'model', 'facenet','opencv_face_detector.pbtxt')
+  faceModel = os.path.join(dir, 'faceInformation', 'model', 'facenet','opencv_face_detector_uint8.pb')
   #Load face detection model
   faceNet=cv2.dnn.readNet(faceModel,faceProto)
   image = pyplot.imread(filename)
@@ -122,12 +124,12 @@ def detect_faces(filename):
   return resultImg, faceBoxes
 
 def classify_faces(filename, faceBoxes, resultImg):
-  ageProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\age\\age_deploy.prototxt"
-  ageModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\age\\age_net.caffemodel"
-  genderProto = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\gender\\gender_deploy.prototxt"
-  genderModel = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\model\\gender\\gender_net.caffemodel"
-  pathImg = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\Dataset/"
-  APPROOT = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\faceInformation\\"
+  ageProto = os.path.join(dir, 'faceInformation', 'model', 'age', 'age_deploy.prototxt')
+  ageModel = os.path.join(dir, 'faceInformation', 'model', 'age', 'age_net.caffemodel')
+  genderProto = os.path.join(dir, 'faceInformation', 'model', 'gender', 'gender_deploy.prototxt')
+  genderModel = os.path.join(dir, 'faceInformation', 'model', 'gender', 'gender_net.caffemodel')
+  pathImg = os.path.join(dir, 'faceInformation', 'Dataset')
+  APPROOT = os.path.join(dir, 'faceInformation')
   
   #Load age detection model
   ageNet=cv2.dnn.readNet(ageModel,ageProto)

@@ -1,5 +1,5 @@
 console.log('Hello World');
-const {BrowserWindow, app, ipcMain, Notification, dialog} = require('electron');
+const {BrowserWindow, app, ipcMain, Notification, dialog, BrowserView} = require('electron');
 const path = require("path");
 const fs = require("fs");
 const spawn = require("child_process").spawn;
@@ -22,6 +22,18 @@ function  createWindow() {
     })
 
     win.loadFile('index.html');
+    /*const clickArea = new BrowserWindow({
+        width: 500,
+        height: 500,
+        backgroundColor: 'red',
+        alwaysOnTop: true,
+        frame: false,
+        transparent: true,
+        resizable: false,
+        movable: false,
+        opacity: 0.5
+    });
+    clickArea.loadFile('index.html')*/
 }
 
 if (isDev){
