@@ -40,7 +40,7 @@ ipcMain.on('upload', (event) => {
         title: 'Select the File to be uploaded',
         defaultPath: path.join(__dirname, '../assets/'),
         buttonLabel: 'Upload',
-        // Restricting the user to only Text Files.
+        // Restricting the user to only Image Files.
         filters: [
             { name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'gif'] }, ],
         // Specifying the File Selector Property
