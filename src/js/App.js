@@ -1,6 +1,5 @@
 import React from "react";
 import { Link} from "react-router-dom";
-//import SelectFace from "../js/SelectFace";
 
 export default function App(){
     return(
@@ -17,12 +16,11 @@ export default function App(){
             <button onClick={() =>
                 electron.modelsApi.boundaryBox()
             }>Draw Boundary Box</button>
-            <button onClick={() =>
-                electron.nextPageApi.nextPage()
-            }>Next Page</button>
             <div className="App">
                 <Link to="/nextpage">
-                    <button>Next Page</button>
+                    <button onClick={() =>
+                        electron.nextPageApi.nextPage()
+                    }>Next Page</button>
                 </Link>  
             </div>
              

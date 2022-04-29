@@ -1,16 +1,9 @@
 import React from "react";
 import FaceBox from "../js/FaceBox";
-//import path from "path";
-//const path = require('path');
 
 
-export default function SelectFace(){
-/*    var _target = document.getElementById('image_container');
-    var _in = _target.innerHTML;*/
-    var filepath = "C:\\Users\\atkdo\\Desktop\\okul\\4 - 2\\CS 492\\desktop\\electron-react-app\\assets\\image1.jpg";
-    var extension = path.extname(filepath);
-    //const image = '<img src="data:image/' + extension + ';base64,' + filepath + '" />';
-    const imageSrc = "data:image/" + extension + ";base," + filepath
+export default function SelectFace(imageSrc){
+
     return(
         <div style={styles.container}>
             <img src={imageSrc} style={styles.image}/>

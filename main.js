@@ -7,6 +7,7 @@ const spawn = require("child_process").spawn;
 const isDev = !app.isPackaged;
 
 var filepath = undefined;
+var imageData = undefined;
 
 function  createWindow() {
     const win = new BrowserWindow({
@@ -70,7 +71,10 @@ ipcMain.on('upload', (event) => {
 ipcMain.on('next_page', (event) => {
     console.log(filepath + "   nextpage version");
     let base_64 = fs.readFileSync(filepath).toString('base64');
-    event.reply("uploaded", base_64);
+    let extension = path.extname(base_64);
+    let imageSrc = 'data:image/' + extension + ';base64,' + base_64;
+    imageData = imageSrc;
+    event.reply("drawn", imageSrc);
 })
 
 ipcMain.on('boundary_box', (event) =>{

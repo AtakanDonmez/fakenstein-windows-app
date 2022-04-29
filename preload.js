@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('electron', {
     filesApi: {
         getImage() {
             ipcRenderer.send('upload');
-        }
+        },
     },
     nextPageApi: {
         nextPage(){
@@ -37,3 +37,10 @@ ipcRenderer.on("uploaded", (event, filepath) => {
     var _target = document.getElementById('image_container');
     _target.innerHTML = _out;
 });
+
+ipcRenderer.on("drawn", (event, imageSrc) => {
+    var _out = '<img src="' + imageSrc + '"/>'
+    //var _out = '<SelectFace imageSrc="' + imageSrc + '"/>'
+    var _target = document.getElementById('faces_container');
+    _target.innerHTML = _out;
+})

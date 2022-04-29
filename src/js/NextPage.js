@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link} from "react-router-dom";
+
  export default function NextPage (){
     return (
         <div className='App'>
@@ -10,10 +11,7 @@ import { Link} from "react-router-dom";
                         Home Page
                     </button>
                 </Link>
-                <button onClick={() => {
-                electron.filesApi.getImage()
-                }}>Upload File</button>
-                <div id="image_container"></div>
+                <div id="faces_container"></div>
             </div>
         </div>
         
