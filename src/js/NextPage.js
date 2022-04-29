@@ -9,7 +9,11 @@ import { Link} from "react-router-dom";
                     <button>
                         Home Page
                     </button>
-                </Link>  
+                </Link>
+                <button onClick={() => {
+                electron.filesApi.getImage()
+                }}>Upload File</button>
+                <div id="image_container"></div>
             </div>
         </div>
         
