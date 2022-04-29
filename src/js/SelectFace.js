@@ -1,5 +1,8 @@
+import React from "react";
 import FaceBox from "../js/FaceBox";
-import path from "path";
+//import path from "path";
+//const path = require('path');
+
 
 export default function SelectFace(){
 /*    var _target = document.getElementById('image_container');
