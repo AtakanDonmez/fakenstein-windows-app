@@ -1,7 +1,9 @@
 import React from "react";
+import { Link} from "react-router-dom";
+
 export default function App(){
     return(
-        <>
+        <div>
             <h1>I am App Component</h1>
             <button onClick={() => {
                 electron.notificationApi.sendNotification('My custom notification!')
@@ -20,7 +22,13 @@ export default function App(){
             <button onClick={() =>
                 electron.nextPageApi.nextPage()
             }>Next Page</button>
-        </>
+            <div className="App">
+                <Link to="/nextpage">
+                    <button>Next Page</button>
+                </Link>  
+            </div>
+             
+        </div>
     )
 }
 
