@@ -56,7 +56,9 @@ ipcMain.on('upload', (event) => {
 })
 
 ipcMain.on('next_page', (event) => {
-
+    console.log(filepath + "   nextpage version");
+    let base_64 = fs.readFileSync(filepath).toString('base64');
+    event.reply("uploaded", base_64);
 })
 
 ipcMain.on('boundary_box', (event) =>{
