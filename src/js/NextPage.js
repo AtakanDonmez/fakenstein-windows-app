@@ -3,7 +3,7 @@ import { Link} from "react-router-dom";
 
 function SelectFace(props){
     return(
-        <h1>I am {props.text}</h1>
+        <img src={props.image}/>
     )
 }
 
@@ -19,7 +19,7 @@ function SelectFace(props){
                     </button>
                 </Link>
                 <div id="faces_container"></div>
-                <SelectFace text={face}/>
+                <SelectFace image={face}/>
             </div>
         </div>
         

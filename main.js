@@ -9,11 +9,7 @@ remoteMain.initialize();
 const isDev = !app.isPackaged;
 
 var filepath = undefined;
-var imageData = undefined;
-/*global.ImageSource = {
-    imageSrc: '123props'
-}*/
-global.imageSource = "123props"
+global.imageSource = undefined;
 
 function  createWindow() {
     const win = new BrowserWindow({
@@ -60,20 +56,19 @@ ipcMain.on('upload', (event) => {
             let base_64 = fs.readFileSync(filePaths[0]).toString('base64');
             console.log(filepath);
             let extension = path.extname(base_64);
-            let imageSrc = 'data:image/' + extension + ';base64,' + base_64;
-            imageSource = "imageSrc";
+            imageSource = 'data:image/' + extension + ';base64,' + base_64;
             event.reply("uploaded", base_64);
         }
     })
 })
 
 ipcMain.on('next_page', (event) => {
-    console.log(filepath + "   nextpage version");
+    /*console.log(filepath + "   nextpage version");
     let base_64 = fs.readFileSync(filepath).toString('base64');
     let extension = path.extname(base_64);
     let imageSrc = 'data:image/' + extension + ';base64,' + base_64;
     imageData = imageSrc;
-    event.reply("drawn", imageSrc);
+    event.reply("drawn", imageSrc);*/
 })
 
 ipcMain.on('boundary_box', (event) =>{
