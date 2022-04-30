@@ -2,13 +2,13 @@ import React from "react";
 import FaceBox from "../js/FaceBox";
 
 
-export default function SelectFace(imageSrc){
+export default function SelectFace(props){
 
     return(
         <div style={styles.container}>
-            <img src={imageSrc} style={styles.image}/>
+            <img src={props.image} style={styles.image}/>
             <div style={styles.boxContainer}>
-                <button style={styles.boxForeground}></button>
+                <FaceBox/>
             </div>
         </div>);
 }
@@ -31,17 +31,5 @@ const styles = {
         backgroundColor: 'transparent',
         width: 500,
         height: 500,
-    },
-    boxForeground: {
-        position: 'absolute',
-        borderColor: 'green',
-        backgroundColor: 'green',
-        borderWidth: 2,
-        borderRadius: 4,
-        opacity: 0.3,
-        height: 50,
-        width: 50,
-        top: 50,
-        left: 50,
     },
 };

@@ -47,9 +47,10 @@ ipcRenderer.on("uploaded", (event, filepath) => {
     _target.innerHTML = _out;
 });
 
+/*
 ipcRenderer.on("drawn", (event, imageSrc) => {
     var _out = '<img src="' + imageSrc + '"/>'
     //var _out = '<SelectFace imageSrc="' + imageSrc + '"/>'
     var _target = document.getElementById('faces_container');
     _target.innerHTML = _out;
-})
+})*/
