@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import FaceBox from "../js/FaceBox";
+import {Colors} from "../Colors";
 
 export default function SelectFace(props){
 /*    var face1 = {isBackground: true, height: 100, width: 100, top: 50, left: 50};
@@ -14,7 +15,7 @@ export default function SelectFace(props){
                 {isBackground: false, height: 100, width: 100, top: 100, left: 200}]);
 
         const dimensions = 0;
-        setImageHeight(500);
+        setImageHeight(350);
     }, [image]);
 
     return(
@@ -34,7 +35,7 @@ const styles = {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'dark',
+        backgroundColor: Colors.dark.background,
     },
     image: {
         flex: 1,
@@ -47,9 +48,11 @@ const styles = {
         backgroundColor: 'transparent',
         width: 500,
         height: 500,
+        top: 88,
+        left: 48,
     },
     text: {
-        color: '#000',
+        color: Colors.dark.text,
         fontSize: 20,
         fontWeight: '600',
     },
