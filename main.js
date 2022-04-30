@@ -13,7 +13,7 @@ var imageData = undefined;
 /*global.ImageSource = {
     imageSrc: '123props'
 }*/
-global.ImageSource = "123props"
+global.imageSource = "123props"
 
 function  createWindow() {
     const win = new BrowserWindow({
@@ -59,6 +59,9 @@ ipcMain.on('upload', (event) => {
             filepath = filePaths[0];
             let base_64 = fs.readFileSync(filePaths[0]).toString('base64');
             console.log(filepath);
+            let extension = path.extname(base_64);
+            let imageSrc = 'data:image/' + extension + ';base64,' + base_64;
+            imageSource = "imageSrc";
             event.reply("uploaded", base_64);
         }
     })
@@ -86,8 +89,8 @@ ipcMain.on('boundary_box', (event) =>{
 })
 
 ipcMain.on('setGlobal', (event, imgSrc) =>{
+    imageSource = imgSrc;
     console.log(imgSrc);
-    global.ImageSource = imgSrc;
 })
 
 app.whenReady().then(createWindow)

@@ -17,12 +17,11 @@ contextBridge.exposeInMainWorld('electron', {
         },
     },
     globalsApi: {
-        imgSource : "props",
         setImgSource(imgSrc){
             ipcRenderer.send('setGlobal', imgSrc);
         },
         getImgSource(){
-            return remote.getGlobal('ImageSource');
+            return remote.getGlobal('imageSource');
         }
     },
     nextPageApi: {
@@ -46,8 +45,6 @@ ipcRenderer.on("uploaded", (event, filepath) => {
     //render/display
     var _target = document.getElementById('image_container');
     _target.innerHTML = _out;
-
-    electron.globalsApi.setImgSource("props123");
 });
 
 ipcRenderer.on("drawn", (event, imageSrc) => {

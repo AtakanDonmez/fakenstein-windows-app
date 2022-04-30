@@ -8,7 +8,7 @@ function SelectFace(props){
 }
 
  export default function NextPage (){
-    const face = electron.globalsApi.getImgSource();
+    var face = electron.globalsApi.getImgSource();
     return (
         <div className='App'>
             <h1>Welcome to the world of Geeks!</h1>
