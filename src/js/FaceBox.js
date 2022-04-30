@@ -3,10 +3,10 @@ import React from "react";
 export default function FaceBox({face}) {
     return(
         <button style={{...styles.boxForeground,
-            ...{height: 50,
-            width: 50,
-            top: 50,
-            left: 50,}}}/>
+            ...{height: face.height,
+            width: face.width,
+            top: face.top,
+            left: face.left,}}}/>
     );
 }
 

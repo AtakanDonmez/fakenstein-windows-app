@@ -3,12 +3,17 @@ import FaceBox from "../js/FaceBox";
 
 
 export default function SelectFace(props){
-
+    var face = {
+        height: 50,
+        width: 50,
+        top: 50,
+        left: 50
+    }
     return(
         <div style={styles.container}>
             <img src={props.image} style={styles.image}/>
             <div style={styles.boxContainer}>
-                <FaceBox/>
+                <FaceBox face={face}/>
             </div>
         </div>);
 }
