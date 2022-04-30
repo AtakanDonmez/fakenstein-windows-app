@@ -1,8 +1,17 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
 export default function FaceBox({face}) {
+    const [selected, setSelected] = useState(false);
+    useEffect(() => {
+        setSelected(face.isBackground);
+    }, []);
+
+    const selectBox = () => {
+        setSelected((!selected));
+    };
+
     return(
-        <button style={{...styles.boxForeground,
+        <button onClick={selectBox} style={{...selected ? styles.boxBackground : styles.boxForeground,
             ...{height: face.height,
             width: face.width,
             top: face.top,
