@@ -3,11 +3,17 @@ const {BrowserWindow, app, ipcMain, Notification, dialog, BrowserView} = require
 const path = require("path");
 const fs = require("fs");
 const spawn = require("child_process").spawn;
+const remoteMain = require('@electron/remote/main');
+remoteMain.initialize();
 
 const isDev = !app.isPackaged;
 
 var filepath = undefined;
 var imageData = undefined;
+/*global.ImageSource = {
+    imageSrc: '123props'
+}*/
+global.ImageSource = "123props"
 
 function  createWindow() {
     const win = new BrowserWindow({
@@ -22,19 +28,9 @@ function  createWindow() {
         }
     })
 
+    remoteMain.enable(win.webContents);
     win.loadFile('index.html');
-    /*const clickArea = new BrowserWindow({
-        width: 500,
-        height: 500,
-        backgroundColor: 'red',
-        alwaysOnTop: true,
-        frame: false,
-        transparent: true,
-        resizable: false,
-        movable: false,
-        opacity: 0.5
-    });
-    clickArea.loadFile('index.html')*/
+
 }
 
 if (isDev){
@@ -87,6 +83,11 @@ ipcMain.on('boundary_box', (event) =>{
     py.on('close', ()=>{
         console.log("python end");
     })
+})
+
+ipcMain.on('setGlobal', (event, imgSrc) =>{
+    console.log(imgSrc);
+    global.ImageSource = imgSrc;
 })
 
 app.whenReady().then(createWindow)

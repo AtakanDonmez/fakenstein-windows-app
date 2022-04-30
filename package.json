@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@electron/remote": "^2.0.8",
     "electron": "^18.0.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

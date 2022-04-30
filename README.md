@@ -13,6 +13,7 @@ npm install --save-dev electron-reload
 npm install react-router-dom --save  
 npm install react-router-dom@6  
 npm install --save babel-loader  
+npm install --sace @electron/remote
 
 // setup is complete, delete all folders in the project folder except the node_modules folder  
 // copy the files here in the repository to the same place where the node_modules folder resides

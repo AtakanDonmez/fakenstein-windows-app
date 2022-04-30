@@ -1,5 +1,6 @@
-const {ipcRenderer, contextBridge} = require('electron');
+const {ipcRenderer, contextBridge, webContents} = require('electron');
 const path = require('path');
+const remote = require('@electron/remote');
 
 contextBridge.exposeInMainWorld('electron', {
     notificationApi: {
@@ -14,6 +15,15 @@ contextBridge.exposeInMainWorld('electron', {
         getImage() {
             ipcRenderer.send('upload');
         },
+    },
+    globalsApi: {
+        imgSource : "props",
+        setImgSource(imgSrc){
+            ipcRenderer.send('setGlobal', imgSrc);
+        },
+        getImgSource(){
+            return remote.getGlobal('ImageSource');
+        }
     },
     nextPageApi: {
         nextPage(){
@@ -36,6 +46,8 @@ ipcRenderer.on("uploaded", (event, filepath) => {
     //render/display
     var _target = document.getElementById('image_container');
     _target.innerHTML = _out;
+
+    electron.globalsApi.setImgSource("props123");
 });
 
 ipcRenderer.on("drawn", (event, imageSrc) => {
