@@ -1,32 +1,33 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Colors} from "../Colors";
 
-export default function App(){
+export default function App() {
     var image = electron.globalsApi.getImgSource();
-    return(
+    const logo = electron.globalsApi.getLogoSource();
+    return (
         <div style={styles.container}>
-            <h1 style={styles.title}>I am App Component</h1>
-            <button onClick={() => {
-                electron.notificationApi.sendNotification('My custom notification!')
-            }} style={styles.button}>Notify</button>
-            <h2 style={styles.title}>File Upload in Electron</h2>
-            <button onClick={() => {
-                electron.filesApi.getImage()
-            }} style={styles.button}>Upload File</button>
-            <div id="image_container" style={styles.image}></div>
+            <img src={logo} style={styles.logo}/>
+            <h1 style={styles.title}>Fakenstein</h1>
+            <div>
+                <button onClick={() => {
+                    electron.filesApi.getImage()
+                }} style={styles.button}>Upload File
+                </button>
+            </div>
             <img src={image} style={styles.image}/>
-            <button onClick={() =>
-                electron.modelsApi.boundaryBox()
-            } style={styles.button}>Draw Boundary Box</button>
-            <div className="App" style={styles.container}>
-                <Link to="/nextpage">
+            <div>
+                <button onClick={() =>
+                    electron.modelsApi.boundaryBox()
+                } style={styles.button}>Draw Boundary Box
+                </button>
+                <Link to="/selectface">
                     <button onClick={() =>
                         electron.nextPageApi.nextPage()
-                    } style={styles.button}>Next Page</button>
-                </Link>  
+                    } style={styles.button}>Next Page
+                    </button>
+                </Link>
             </div>
-             
         </div>
     )
 }
@@ -68,7 +69,6 @@ const styles = {
     logo: {
         alignItems: 'center',
         width: 400,
-        height: 400,
     },
     image: {
         flex: 1,
@@ -82,5 +82,6 @@ const styles = {
         textAlign: 'center',
         color: Colors.dark.background,
         backgroundColor: Colors.dark.text,
+        borderRadius: 5,
     },
 }

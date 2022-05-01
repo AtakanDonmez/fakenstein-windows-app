@@ -22,7 +22,10 @@ contextBridge.exposeInMainWorld('electron', {
         },
         getImgSource(){
             return remote.getGlobal('imageSource');
-        }
+        },
+        getLogoSource(){
+            return remote.getGlobal('logoSource');
+        },
     },
     nextPageApi: {
         nextPage(){
@@ -40,11 +43,11 @@ contextBridge.exposeInMainWorld('electron', {
 
 ipcRenderer.on("uploaded", (event, filepath) => {
     //example for .png
-    extension = path.extname(filepath);
+    /*extension = path.extname(filepath);
     var _out = '<img src="data:image/' + extension + ';base64,' + filepath + '" />';
     //render/display
     var _target = document.getElementById('image_container');
-    _target.innerHTML = _out;
+    _target.innerHTML = _out;*/
 });
 
 /*

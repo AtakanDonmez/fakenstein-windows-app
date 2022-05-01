@@ -22,5 +22,6 @@ export const Colors = {
         tint: tintColorDark,
         tabIconDefault: '#ccc',
         tabIconSelected: tintColorDark,
+        cancel: '#e00d0d',
     },
 };

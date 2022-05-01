@@ -10,7 +10,9 @@ const isDev = !app.isPackaged;
 
 var filepath = undefined;
 global.imageSource = undefined;
+global.logoSource = path.join(__dirname, 'assets', 'logo.png');
 
+//TODO fix height of program & window & images
 function  createWindow() {
     const win = new BrowserWindow({
         width: 1200,
@@ -57,6 +59,7 @@ ipcMain.on('upload', (event) => {
             console.log(filepath);
             let extension = path.extname(base_64);
             imageSource = 'data:image/' + extension + ';base64,' + base_64;
+            BrowserWindow.getFocusedWindow().reload();
             event.reply("uploaded", base_64);
         }
     })
@@ -83,9 +86,4 @@ ipcMain.on('boundary_box', (event) =>{
     })
 })
 
-ipcMain.on('setGlobal', (event, imgSrc) =>{
-    imageSource = imgSrc;
-    console.log(imgSrc);
-})
-
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
