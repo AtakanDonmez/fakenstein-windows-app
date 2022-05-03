@@ -1,2 +1,4 @@
 # Project exclude paths
 /node_modules/
+/faces.json
+/assets/Fakenstein-Backend-main/.idea/

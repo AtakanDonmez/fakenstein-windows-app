@@ -76,7 +76,7 @@ ipcMain.on('next_page', (event) => {
 
 ipcMain.on('boundary_box', (event) =>{
     console.log("python start");
-    let pypath = path.join(__dirname, 'assets', 'final.py');
+    let pypath = path.join(__dirname, 'assets', 'Fakenstein-Backend-Main','desktop_detect.py');
     console.log(pypath);
     console.log(filepath);
     let py = spawn('python',[pypath, filepath]);
