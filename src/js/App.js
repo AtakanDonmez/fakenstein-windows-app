@@ -1,10 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Colors} from "../Colors";
 
 export default function App() {
     var image = electron.globalsApi.getImgSource();
     const logo = electron.globalsApi.getLogoSource();
+    const navigate = useNavigate();
     return (
         <div style={styles.container}>
             <img src={logo} style={styles.logo}/>
@@ -18,7 +19,7 @@ export default function App() {
             <img src={image} style={styles.image}/>
             <div>
                 <button onClick={() =>
-                    electron.modelsApi.boundaryBox()
+                    electron.modelsApi.boundaryBox(navigate)
                 } style={styles.button}>Draw Boundary Box
                 </button>
                 <Link to="/selectface">

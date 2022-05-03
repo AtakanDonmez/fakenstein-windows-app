@@ -83,7 +83,8 @@ ipcMain.on('boundary_box', (event) =>{
     py.stdout.on('data', data => console.log('data : ', data.toString()));
     py.on('close', ()=>{
         console.log("python end");
-    })
+        event.reply("drawn");
+    });
 })
 
 app.whenReady().then(createWindow);
