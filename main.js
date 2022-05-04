@@ -31,11 +31,12 @@ function  createWindow() {
 
 }
 
-if (isDev){
+// hot-reload
+/*if (isDev){
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
     })
-}
+}*/
 
 
 ipcMain.on('notify', (_, message) => {

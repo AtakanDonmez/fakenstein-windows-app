@@ -37,6 +37,7 @@ contextBridge.exposeInMainWorld('electron', {
     modelsApi: {
         boundaryBox(navigate){
             ipcRenderer.send('boundary_box');
+            navigate("/loadingscreen");
             ipcRenderer.on("drawn", event => {
                 navigate("/selectface");
             });
