@@ -4,7 +4,7 @@ import {MemoryRouter as Router, Routes, Route} from "react-router-dom";
 
 import App from "./App";
 import SelectFaceScreen from "./SelectFaceScreen";
-import EditScreen from "./EditScreen";
+import ModifyScreen from "./ModifyScreen";
 import LoadingScreen from "./LoadingScreen";
 import './index.scss';
 
@@ -14,7 +14,7 @@ ReactDom.render(
             <Routes>
                 <Route path="/*" element={<App/>}></Route>
                 <Route exact path="/selectface" element={<SelectFaceScreen/>}/>
-                <Route exact path="/editscreen" element={<EditScreen/>}/>
+                <Route exact path="/modifyscreen" element={<ModifyScreen/>}/>
                 <Route exact path="/loadingscreen" element={<LoadingScreen/>}/>
             </Routes>
         </Router>

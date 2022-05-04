@@ -17,7 +17,7 @@ export default function SelectFaceScreen() {
                 </Link>
             </div>
             <div>
-                <Link to="/editscreen">
+                <Link to="/modifyscreen">
                     <button style={styles.button}>
                         Replace Faces
                     </button>
