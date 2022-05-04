@@ -18,6 +18,9 @@ contextBridge.exposeInMainWorld('electron', {
         getImage() {
             ipcRenderer.send('upload');
         },
+        setIsBackground(inx, isBack){
+            ipcRenderer.send('setIsBackgrounb', {inx, isBack});
+        }
     },
     globalsApi: {
         setImgSource(imgSrc){
@@ -42,6 +45,9 @@ contextBridge.exposeInMainWorld('electron', {
     nextPageApi: {
         nextPage(){
             ipcRenderer.send('next_page');
+        },
+        replaceFaces(){
+            ipcRenderer.send('replaceFaces');
         }
     },
 
@@ -51,8 +57,9 @@ contextBridge.exposeInMainWorld('electron', {
             navigate("/loadingscreen");
             ipcRenderer.on("drawn", event => {
                 //navigate("/selectface");
+                var faces = remote.getGlobal('faces');
                 navigate('/selectface',
-                    {state:{faces: remote.getGlobal('faces')}});
+                    {state:{faces: faces, id: 1}});
             });
         }
     }

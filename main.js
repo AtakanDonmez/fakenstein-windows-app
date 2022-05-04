@@ -86,6 +86,10 @@ ipcMain.on('next_page', (event) => {
     event.reply("drawn", imageSrc);*/
 })
 
+ipcMain.on('setIsBackgrounb', ((event, args) => {
+    faces[args.inx].isBackground = args.isBack;
+}))
+
 ipcMain.on('boundary_box', (event) =>{
     console.log("python start");
     let pypath = path.join(__dirname, 'assets', 'Fakenstein-Backend-Main','desktop_detect.py');
@@ -93,18 +97,38 @@ ipcMain.on('boundary_box', (event) =>{
     console.log(filepath);
     let py = spawn('python',[pypath, filepath]);
     py.stdout.on('data', data => console.log('data : ', data.toString()));
-    py.on('close', ()=>{
+    py.on('exit', ()=>{
         console.log("python end");
-        var parsedJSON = require('./faces.json');
+        /*var parsedJSON = require('./faces.json');
         //var obj = JSON.parse(result);
         var keys = Object.keys(parsedJSON);
         faces = [];
         for (var i = 0; i < keys.length; i++) {
             //console.log(parsedJSON[keys[i]]);
             faces.push(parsedJSON[keys[i]]);
-        }
+        }*/
+        //console.log(faces);
+        fs.readFile('./faces.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log("File read failed:", err)
+                return
+            }
+            var parsedJSON = JSON.parse(jsonString);
+            var keys = Object.keys(parsedJSON);
+            faces = [];
+            for (var i = 0; i < keys.length; i++) {
+                //console.log(parsedJSON[keys[i]]);
+                faces.push(parsedJSON[keys[i]]);
+            }
+            console.log(faces);
+        })
         event.reply("drawn");
     });
+})
+
+ipcMain.on('replaceFaces', (event) => {
+    var content = JSON.stringify(faces);
+    fs.writeFileSync('./newFaces.json', content);
 })
 
 app.whenReady().then(createWindow);

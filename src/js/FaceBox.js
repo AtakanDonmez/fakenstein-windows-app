@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-export default function FaceBox({face}) {
+export default function FaceBox({inx, face}) {
     const [selected, setSelected] = useState(false);
     useEffect(() => {
         setSelected(face.isBackground);
@@ -8,6 +8,7 @@ export default function FaceBox({face}) {
 
     const selectBox = () => {
         setSelected((!selected));
+        electron.filesApi.setIsBackground(inx, selected);
     };
 
     return(

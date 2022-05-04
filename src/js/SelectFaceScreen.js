@@ -14,11 +14,13 @@ export default function SelectFaceScreen({face}) {
     useEffect(() => {
         //setFaces([{isBackground: true, height: 100, width: 100, top: 50, left: 50},
         //    {isBackground: false, height: 100, width: 100, top: 100, left: 200}]);
-        setFaces(location.state.faces);
-        console.log(location.state.faces);
+        var faceLoader = electron.globalsApi.getFaces()
+        setFaces(faceLoader);
+        console.log("used");
+        console.log(faceLoader);
         const dimensions = 0;
         setImageHeight(350);
-    }, [location.state]);
+    }, []);
 
     return (
         <div className='App' style={styles.container}>
@@ -26,7 +28,7 @@ export default function SelectFaceScreen({face}) {
             <img src={image} style={styles.image}/>
             <div style={{...styles.boxContainer, ...{height: imageHeight,}}}>
                 {(faces.length > 0) && faces.map((face, index) => (
-                    <FaceBox key={index} face={face}/>
+                    <FaceBox key={index} inx={index} face={face}/>
                 ))}
             </div>
             <div>
@@ -38,7 +40,9 @@ export default function SelectFaceScreen({face}) {
             </div>
             <div>
                 <Link to="/modifyscreen">
-                    <button style={styles.button}>
+                    <button style={styles.button} onClick={() => {
+                        electron.nextPageApi.replaceFaces();
+                    }}>
                         Replace Faces
                     </button>
                 </Link>
@@ -50,9 +54,11 @@ export default function SelectFaceScreen({face}) {
 
 const styles = {
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        //flex: 1,
+        position: 'absolute',
+        left: 0,
+        //alignItems: 'center',
+        //justifyContent: 'center',
         backgroundColor: Colors.dark.background,
     },
     button: {
@@ -73,8 +79,7 @@ const styles = {
     },
     image: {
         flex: 1,
-        width: 500,
-        height: undefined,
+        left: 0,
         resizeMode: 'contain',
     },
     boxContainer: {
@@ -83,7 +88,7 @@ const styles = {
         width: 500,
         height: 500,
         top: 88,
-        left: 48,
+        left: 0,
     },
     text: {
         color: Colors.dark.text,

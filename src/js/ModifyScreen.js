@@ -14,8 +14,11 @@ export default function ModifyScreen() {
     const imageHeight = 350;
 
     useEffect(() => {
-        setBoxes([{isBackground: true, height: 100, width: 100, top: 50, left: 50},
-            {isBackground: false, height: 100, width: 100, top: 100, left: 200}])
+        var faceLoader = electron.globalsApi.getFaces()
+        /*setBoxes([{isBackground: true, height: 100, width: 100, top: 50, left: 50},
+            {isBackground: false, height: 100, width: 100, top: 100, left: 200}])*/
+        setBoxes(faceLoader);
+        setImage(electron.globalsApi.getImgSource());
     }, [])
 
     const showPopup = (ind) => {
@@ -80,8 +83,6 @@ const styles ={
     },
     image: {
         flex: 1,
-        width: 500,
-        height: undefined,
         resizeMode: 'contain',
     },
     boxContainer: {
