@@ -27,6 +27,12 @@ contextBridge.exposeInMainWorld('electron', {
         getLogoSource(){
             return remote.getGlobal('logoSource');
         },
+        getDWidth(){
+            return remote.getGlobal(('dWidth'));
+        },
+        getDHeight(){
+            return remote.getGlobal(('dHeight'));
+        }
     },
     nextPageApi: {
         nextPage(){

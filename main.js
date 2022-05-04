@@ -1,5 +1,5 @@
 console.log('Hello World');
-const {BrowserWindow, app, ipcMain, Notification, dialog, BrowserView} = require('electron');
+const {BrowserWindow, app, ipcMain, Notification, dialog, BrowserView, screen} = require('electron');
 const path = require("path");
 const fs = require("fs");
 const spawn = require("child_process").spawn;
@@ -11,13 +11,19 @@ const isDev = !app.isPackaged;
 var filepath = undefined;
 global.imageSource = undefined;
 global.logoSource = path.join(__dirname, 'assets', 'logo.png');
+global.dWidth = undefined;
+global.dHeight = undefined;
 
 //TODO fix height of program & window & images
 function  createWindow() {
+    dWidth = screen.getPrimaryDisplay().workArea.width;
+    dHeight = screen.getPrimaryDisplay().workArea.height;
     const win = new BrowserWindow({
-        width: 1200,
-        height: 800,
+        //resizable: false,
+        //movable: false,
         backgroundColor: "white",
+        width: dWidth,
+        height: dHeight,
         webPreferences: {
             nodeIntegration: false,
             worldSafeExecuteJavaScript: true,
@@ -26,9 +32,12 @@ function  createWindow() {
         }
     })
 
+    win.maximize();
+    win.setPosition(0,0);
     remoteMain.enable(win.webContents);
     win.loadFile('index.html');
-
+    dWidth = screen.getPrimaryDisplay().size.width;
+    dHeight = screen.getPrimaryDisplay().size.height;
 }
 
 // hot-reload
