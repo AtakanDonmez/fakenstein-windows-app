@@ -8,7 +8,7 @@ export default function FaceBox({inx, face}) {
 
     const selectBox = () => {
         setSelected((!selected));
-        electron.filesApi.setIsBackground(inx, selected);
+        electron.filesApi.setIsBackground(inx, !selected);
     };
 
     return(

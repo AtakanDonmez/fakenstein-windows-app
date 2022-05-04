@@ -88,6 +88,7 @@ ipcMain.on('next_page', (event) => {
 
 ipcMain.on('setIsBackgrounb', ((event, args) => {
     faces[args.inx].isBackground = args.isBack;
+    console.log(faces[args.inx].isBackground);
 }))
 
 ipcMain.on('boundary_box', (event) =>{
@@ -120,6 +121,7 @@ ipcMain.on('boundary_box', (event) =>{
                 //console.log(parsedJSON[keys[i]]);
                 faces.push(parsedJSON[keys[i]]);
             }
+
             console.log(faces);
         })
         event.reply("drawn");
@@ -127,8 +129,12 @@ ipcMain.on('boundary_box', (event) =>{
 })
 
 ipcMain.on('replaceFaces', (event) => {
-    var content = JSON.stringify(faces);
-    fs.writeFileSync('./newFaces.json', content);
+    var newjson = {};
+    for (var i = 0; i < faces.length; i++){
+        newjson[i] = faces[i];
+    }
+    var content = JSON.stringify(newjson);
+    fs.writeFileSync('./faces.json', content);
 })
 
 app.whenReady().then(createWindow);
