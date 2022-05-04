@@ -89,7 +89,7 @@ def main():
         else :
             faces[face]["invalid"] = False
             image.paste(blended, (int(left), int(top)))
-            last_image_name = 'output_blended{}.png'.format(face)
+            last_image_name = 'output.png'.format(face)
             image.save(last_image_name)
 
     #todo: should I change reblend back to false after blending?
