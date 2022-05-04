@@ -1,7 +1,9 @@
 const {ipcRenderer, contextBridge, webContents} = require('electron');
 const path = require('path');
 const remote = require('@electron/remote');
-var navigator = undefined;
+const React = require("react");
+
+let selectRef = React.createRef();
 
 contextBridge.exposeInMainWorld('electron', {
     notificationApi: {
@@ -28,10 +30,13 @@ contextBridge.exposeInMainWorld('electron', {
             return remote.getGlobal('logoSource');
         },
         getDWidth(){
-            return remote.getGlobal(('dWidth'));
+            return remote.getGlobal('dWidth');
         },
         getDHeight(){
-            return remote.getGlobal(('dHeight'));
+            return remote.getGlobal('dHeight');
+        },
+        getFaces(){
+            return remote.getGlobal('faces');
         }
     },
     nextPageApi: {
@@ -45,7 +50,9 @@ contextBridge.exposeInMainWorld('electron', {
             ipcRenderer.send('boundary_box');
             navigate("/loadingscreen");
             ipcRenderer.on("drawn", event => {
-                navigate("/selectface");
+                //navigate("/selectface");
+                navigate('/selectface',
+                    {state:{faces: remote.getGlobal('faces')}});
             });
         }
     }

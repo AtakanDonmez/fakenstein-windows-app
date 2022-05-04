@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const spawn = require("child_process").spawn;
 const remoteMain = require('@electron/remote/main');
+const parsedJSON = require("./faces.json");
 remoteMain.initialize();
 
 const isDev = !app.isPackaged;
@@ -13,6 +14,7 @@ global.imageSource = undefined;
 global.logoSource = path.join(__dirname, 'assets', 'logo.png');
 global.dWidth = undefined;
 global.dHeight = undefined;
+global.faces = [];
 
 //TODO fix height of program & window & images
 function  createWindow() {
@@ -93,6 +95,14 @@ ipcMain.on('boundary_box', (event) =>{
     py.stdout.on('data', data => console.log('data : ', data.toString()));
     py.on('close', ()=>{
         console.log("python end");
+        var parsedJSON = require('./faces.json');
+        //var obj = JSON.parse(result);
+        var keys = Object.keys(parsedJSON);
+        faces = [];
+        for (var i = 0; i < keys.length; i++) {
+            //console.log(parsedJSON[keys[i]]);
+            faces.push(parsedJSON[keys[i]]);
+        }
         event.reply("drawn");
     });
 })

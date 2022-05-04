@@ -1,22 +1,24 @@
 import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import FaceBox from "../js/FaceBox";
 import {Colors} from "../Colors";
 
 //TODO mount faceboxes on proper positions
-export default function SelectFaceScreen() {
+export default function SelectFaceScreen({face}) {
+    const location = useLocation();
     var imageSrc = electron.globalsApi.getImgSource();
     const [image, setImage] = useState(imageSrc);
     const [faces, setFaces] = useState([]);
     const [imageHeight, setImageHeight] = useState(0);
 
     useEffect(() => {
-        setFaces([{isBackground: true, height: 100, width: 100, top: 50, left: 50},
-            {isBackground: false, height: 100, width: 100, top: 100, left: 200}]);
-
+        //setFaces([{isBackground: true, height: 100, width: 100, top: 50, left: 50},
+        //    {isBackground: false, height: 100, width: 100, top: 100, left: 200}]);
+        setFaces(location.state.faces);
+        console.log(location.state.faces);
         const dimensions = 0;
         setImageHeight(350);
-    }, [image]);
+    }, [location.state]);
 
     return (
         <div className='App' style={styles.container}>
